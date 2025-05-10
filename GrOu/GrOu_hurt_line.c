@@ -1,5 +1,15 @@
 #include "GrOu.h"
 
+// the gobj here is the stage itself...
+void stageFrameCallback(GOBJ* gobj) {
+    void (*cb)(GOBJ * gobj) = (void*)0x80223A24;
+    cb(gobj);
+
+    // do our stuff after the callback
+
+    // TODO: stuff after callback
+}
+
 // TODO: make dangerous collision lines
 LineHazardDesc* gr_ft_line_touch(int line_id) {
     static int dmg_groups[] = { 1 };
@@ -15,7 +25,7 @@ LineHazardDesc* gr_ft_line_touch(int line_id) {
             .kb = 80,
             .element = 1,
             .x1c = 1,
-            .sfx = 8,
+            .sfx = 8
         },
         // bottom
         {

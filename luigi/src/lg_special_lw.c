@@ -1,6 +1,8 @@
 #include "luigi.h"
 
 void lg_specialLw_iasaCallback(GOBJ* gobj) {
+	// Fighter_LoseStock, Fighter_Respawn... kills?
+
 	if (Fighter_IASACheck_JumpF(gobj) != 0) {
 		ActionStateChange(0, 1, 0, gobj, ASID_KNEEBEND, 0x0, 0);
 	}

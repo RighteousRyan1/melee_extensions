@@ -1,5 +1,6 @@
 #include "luigi.h"
 #include "lg_special_lw.c"
+#include "lg_special_s_end.c"
 
 __attribute__((used))
 static struct FtState move_logic[] = {
@@ -45,7 +46,7 @@ static struct FtState move_logic[] = {
 		0x340212,   // StateFlags
 		0x13,       // AttackID
 		0x0,        // BitFlags
-		0x80142E98, // AnimationCallback
+		lg_special_hold_s, // AnimationCallback
 		0x80142FD8, // IASACallback
 		0x80143038, // PhysicsCallback
 		0x80143078, // CollisionCallback
@@ -69,7 +70,7 @@ static struct FtState move_logic[] = {
 		0x340212,   // StateFlags
 		0x13,       // AttackID
 		0x0,        // BitFlags
-		0x80143D7C, // AnimationCallback
+		lg_special_s_end, // AnimationCallback
 		0x80143DF4, // IASACallback
 		0x80143DFC, // PhysicsCallback
 		0x80143E8C, // CollisionCallback

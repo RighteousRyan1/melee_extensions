@@ -9,10 +9,16 @@ void dk_specialHiAir(GOBJ* gobj) {
 
 	FighterData* fd = gobj->userdata;
 
-	if (fd->input.trigger > 0) {
-		//up_b_count++;
+	if (fd->state.frame == 1) {
+		up_b_count = 0;
 	}
-	fd->phys.self_vel.Y += up_b_count;
+	
+	if (fd->input.timer_b) {
+		up_b_count++;
+		OSReport("nonzero, -> %f\n", fd->input.timer_b);
+		OSReport("up_b_count eval: %f\n", up_b_count / 100.0);
+	}
+	fd->phys.self_vel.Y += up_b_count / 100.0;
 
-	OSReport("up_b_count: %f\n", fd->input.trigger);
+	OSReport("self_vel.Y: %f\n", fd->phys.self_vel.Y);
 }

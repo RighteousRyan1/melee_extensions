@@ -7,5 +7,8 @@ void lg_special_s_end(GOBJ* gobj) {
 
 	appr_lstick = 0;
 
+	//FighterData* fd = gobj->userdata;
+	//fd->special_attributes2
+
 	OSReport("Reset appr_lstick.");
 }

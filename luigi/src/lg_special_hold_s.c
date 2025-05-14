@@ -17,6 +17,8 @@ void lg_special_hold_s(GOBJ* gobj) {
 	FighterData* fd = gobj->userdata;
 	JOBJ* jobj = gobj->hsd_object;
 
+	// ItemDesc** items = fd->ftData->items;
+
 	float rand_num = random_float(0.1, rand_max);
 
 	//Fighter_SetScale(gobj, rand_num);

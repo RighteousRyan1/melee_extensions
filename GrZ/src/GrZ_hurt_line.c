@@ -1,19 +1,28 @@
-#include "GrOu.h"
+#include "GrZ.h"
 
 // the gobj here is the stage itself...
-void stageFrameCallback(GOBJ* gobj) {
-    void (*cb)(GOBJ * gobj) = (void*)0x80223A24;
-    cb(gobj);
+void GrZ_onCreation(GOBJ* map) {
+    // = 0x802239F0 = gobj[0] frameCallback
+    // 0x802238DC = OnStageGo GrZTi
+    // 0x80223A2C = onCreation (GrZTi), gobj 2
+    void (*cb)(GOBJ * gobj) = (void*)0x80223A2C;
+    cb(map);
 
-    // do our stuff after the callback
+    MapData* md = map->userdata;
+    // FighterData fd = fighter->userdata;
+    
+    Stage_InitDamageHazard(map, 0, OnTouchLine); //Hazard_OnTouch);
+    //Stage_AddFtChkDevice(map, 0, Hazard_OnTouch);
 
-    // TODO: stuff after callback
+    OSReport("onCreation Callback initialized.\n");
 }
 
 // TODO: make dangerous collision lines
-LineHazardDesc* gr_ft_line_touch(int line_id) {
+LineHazardDesc* OnTouchLine(int line_id) {
     static int dmg_groups[] = { 1 };
 
+    //OSReport("OnTouchLine\n");
+    
     static LineHazardDesc hazard_desc[] = {
         // ground
         {
@@ -23,9 +32,9 @@ LineHazardDesc* gr_ft_line_touch(int line_id) {
             .kb_growth = 100,
             .x10 = 0,
             .kb = 80,
-            .element = 1,
+            .element = HITATTR_SLASH,
             .x1c = 1,
-            .sfx = 8
+            .sfx = HITSFX_SWORD
         },
         // bottom
         {
@@ -35,9 +44,9 @@ LineHazardDesc* gr_ft_line_touch(int line_id) {
             .kb_growth = 100,
             .x10 = 0,
             .kb = 80,
-            .element = 1,
+            .element = HITATTR_FIRE,
             .x1c = 1,
-            .sfx = 8,
+            .sfx = HITSFX_FIRE,
         },
         // left wall
         {
@@ -47,9 +56,9 @@ LineHazardDesc* gr_ft_line_touch(int line_id) {
             .kb_growth = 100,
             .x10 = 0,
             .kb = 80,
-            .element = 1,
+            .element = HITATTR_FIRE,
             .x1c = 1,
-            .sfx = 8,
+            .sfx = HITSFX_FIRE,
         },
         // right wall
         {
@@ -59,9 +68,9 @@ LineHazardDesc* gr_ft_line_touch(int line_id) {
             .kb_growth = 100,
             .x10 = 0,
             .kb = 80,
-            .element = 1,
+            .element = HITATTR_FIRE,
             .x1c = 1,
-            .sfx = 8,
+            .sfx = HITSFX_FIRE,
         },
     };
 
@@ -75,6 +84,7 @@ LineHazardDesc* gr_ft_line_touch(int line_id) {
             if (group_id == dmg_groups[i]) {
                 // get line direction to determine damage direction
                 int line_dir = Stage_GetLinesDirection(line_id);
+
                 switch (line_dir) {
                     case (LINEDIR_GROUND):
                         return &hazard_desc[0];

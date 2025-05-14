@@ -1,5 +1,5 @@
-#include "GrOu.h"
-#include "GrOu_hurt_line.c"
+#include "only_up.h"
+#include "only_up_hazards.c"
 
 __attribute__((used))
 static struct MapDesc map_gobjs[] = {
@@ -7,7 +7,7 @@ static struct MapDesc map_gobjs[] = {
 	{
 		.onCreation = 0x802239F0,
 		.onDeletion = 0x80223A1C,
-		.onFrame = stageFrameCallback,
+		.onFrame = 0x80223A24,
 		.onUnk = 0x80223A28,
 		.is_lobj = 0,
 		.is_fog = 0,
@@ -25,7 +25,7 @@ static struct MapDesc map_gobjs[] = {
 	},
 	// map gobj 2
 	{
-		.onCreation = 0x80223A2C,
+		.onCreation = grOuCa_onCreation,
 		.onDeletion = 0x80223A7C,
 		.onFrame = 0x80223A84,
 		.onUnk = 0x80223AB8,

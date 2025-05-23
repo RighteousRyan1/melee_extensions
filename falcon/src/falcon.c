@@ -2,7 +2,7 @@
 #include "specialAirN.c"
 
 __attribute__((used))
-static struct MoveLogic move_logic[] = {
+static struct FtState move_logic[] = {
 	// State: 341 - Swing42
 	{
 		295,        // AnimationID

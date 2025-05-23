@@ -11,13 +11,12 @@ void GrZ_onCreation(GOBJ* map) {
     MapData* md = map->userdata;
     // FighterData fd = fighter->userdata;
     
-    Stage_InitDamageHazard(map, 0, OnTouchLine); //Hazard_OnTouch);
+    Stage_InitDamageHazard(map, 0, OnTouchLine);
     //Stage_AddFtChkDevice(map, 0, Hazard_OnTouch);
 
     OSReport("onCreation Callback initialized.\n");
 }
 
-// TODO: make dangerous collision lines
 LineHazardDesc* OnTouchLine(int line_id) {
     static int dmg_groups[] = { 1 };
 

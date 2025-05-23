@@ -1,19 +1,20 @@
 #include "only_up.h"
 
+// just experimenting a tad
+/*SpawnItem i = {
+    .it_kind = ITEM_HOMERUNBAT,
+    .pos = {.X = 0, .Y = 20, .Z = 0 },
+    .vel = {.X = 0, .Y = 1, .Z = 0 }
+};*/
+
 // the gobj here is the stage itself...
 void grOuCa_onCreation(GOBJ* map) {
-    // = 0x802239F0 = gobj[0] frameCallback
-    // 0x802238DC = OnStageGo GrZTi
-    // 0x80223A2C = onCreation (GrZTi), gobj 2
-
     // callback to the original load of the stage
     void (*cb)(GOBJ * gobj) = (void*)0x80223A2C;
     cb(map);
 
     MapData* md = map->userdata;
-    // FighterData fd = fighter->userdata;
-    
-    // for anything facing up, down, left, or right
+
     Stage_InitDamageHazard(map, 0, OnTouchLine);
 
     // magical shit
@@ -21,17 +22,16 @@ void grOuCa_onCreation(GOBJ* map) {
     // AOBJ* anim = camera->aobj;
     // _HSD_FObj* fobj = anim->fobj;
     
-    // not entirely sure what this does but this is here for a note...?
-    // Stage_AddFtChkDevice(map, 0, Hazard_OnTouch);
+    // Item_CreateItem(&i);
 
     OSReport("GrOuCa Callback initialized.\n");
 }
 
-// why must this be named this way?
 LineHazardDesc* OnTouchLine(int line_id) {
     // not invalid line
     if (line_id != -1) {
         int group_id = Stage_GetLinesGroup(line_id);
+
         // check all dmg line groups
         for (int i = 0; i < dmg_groups_cardinal_count; i++) {
             // if this is one of them
@@ -100,16 +100,20 @@ LineHazardDesc* OnTouchLine(int line_id) {
 
 // the start of brain-fuckery
 
-const int dmg_groups_cardinal[] = { 45 };
-const int dmg_groups_cardinal_count = 1;
-const int dmg_groups_nomatch[] = { 0 };
-const int dmg_groups_nomatch_count = 0;
+const int dmg_groups_cardinal[] = { 45, 62, 63, 64, 68, 69 };
+const int dmg_groups_cardinal_count = 6;
+const int dmg_groups_nomatch[] = { 48, 50, 52, 57 };
+const int dmg_groups_nomatch_count = 4;
 
-const int dmg_groups_cardinal_onlytops[] = { 0 };
+const int dmg_groups_cardinal_onlytops[] = { -1 };
 const int dmg_groups_cardinal_onlytops_count = 0;
 
-const int dmg_groups_nomatch_onlytops[] = { 47 };
-const int dmg_groups_nomatch_onlytops_count = 1;
+const int dmg_groups_nomatch_onlytops[] = { 47, 49, 51 };
+const int dmg_groups_nomatch_onlytops_count = 3;
+
+// x0 could be "match direction of fighter"?
+// x1c could also be
+// x0 = 1, x1c = 1
 
 static LineHazardDesc hazard_desc_cardinal[] = {
     // ground
@@ -127,7 +131,7 @@ static LineHazardDesc hazard_desc_cardinal[] = {
     // bottom
     {
         .x0 = 1,
-        .angle = 90,
+        .angle = 270,
         .x10 = 0,
         .x1c = 1,
         .dmg = ALL_DMG,
@@ -139,7 +143,7 @@ static LineHazardDesc hazard_desc_cardinal[] = {
     // left wall
     {
         .x0 = 1,
-        .angle = 90,
+        .angle = 180,
         .x10 = 0,
         .x1c = 1,
         .dmg = ALL_DMG,
@@ -151,7 +155,7 @@ static LineHazardDesc hazard_desc_cardinal[] = {
     // right wall
     {
         .x0 = 1,
-        .angle = 90,
+        .angle = 0,
         .x10 = 0,
         .x1c = 1,
         .dmg = ALL_DMG,
@@ -165,7 +169,7 @@ static LineHazardDesc hazard_desc_nomatch[] = {
     // ground
     {
         .x0 = 1,
-        .angle = 180,
+        .angle = 0,
         .x10 = 0,
         .x1c = 1,
         .dmg = ALL_DMG / NOMATCH_DIVISOR,
@@ -177,7 +181,7 @@ static LineHazardDesc hazard_desc_nomatch[] = {
     // bottom
     {
         .x0 = 1,
-        .angle = 0,
+        .angle = 180,
         .x10 = 0,
         .x1c = 1,
         .dmg = ALL_DMG / NOMATCH_DIVISOR,
@@ -224,7 +228,7 @@ static LineHazardDesc hazard_desc_up = {
 };
 static LineHazardDesc hazard_desc_nomatch_up = {
     .x0 = 1,
-    .angle = 180,
+    .angle = 135,
     .x10 = 0,
     .x1c = 1,
     .dmg = ALL_DMG / NOMATCH_DIVISOR,
@@ -233,7 +237,6 @@ static LineHazardDesc hazard_desc_nomatch_up = {
     .element = ALL_ELEM,
     .sfx = ALL_SFX
 };
-
 static LineHazardDesc hazard_desc_harmless = {
     .x0 = 1,
     .angle = 0,

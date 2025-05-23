@@ -1,6 +1,5 @@
-#include "GrZ.h"
-#include "GrZ_hurt_line.c"
-#include "GrZ_experiments.c"
+#include "ilm.h"
+#include "ilm_launcher.c"
 
 __attribute__((used))
 static struct MapDesc map_gobjs[] = {
@@ -26,22 +25,12 @@ static struct MapDesc map_gobjs[] = {
 	},
 	// map gobj 2
 	{
-		.onCreation = GrZ_onCreation,
-		.onDeletion = 0x80223A7C,
-		.onFrame = onFrame,
+		.onCreation = 0x80223A2C,
+		.onDeletion = onDeletion,
+		.onFrame = onFrameCb,
 		.onUnk = 0x80223AB8,
 		.is_lobj = 1,
 		.is_fog = 1,
-		.is_cobj = 0,
-	},
-	// map gobj 3
-	{
-		.onCreation = 0x0,
-		.onDeletion = 0x0,
-		.onFrame = 0x0,
-		.onUnk = 0x0,
-		.is_lobj = 0,
-		.is_fog = 0,
 		.is_cobj = 0,
 	},
 };

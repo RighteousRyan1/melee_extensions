@@ -12,14 +12,16 @@ void lg_special_hold_s(GOBJ* gobj) {
 	void (*cb)(GOBJ * gobj) = (void*)0x80142E98;
 	cb(gobj);
 	
-	static float rand_max = 5.0;
+	// static float rand_max = 5.0;
 
 	FighterData* fd = gobj->userdata;
-	JOBJ* jobj = gobj->hsd_object;
+	// JOBJ* jobj = gobj->hsd_object;
 
 	// ItemDesc** items = fd->ftData->items;
 
-	float rand_num = random_float(0.1, rand_max);
+	Fighter_SetScale(gobj, fd->input.trigger * 10.0 + 1.0);
+
+	/*float rand_num = random_float(0.1, rand_max);
 
 	//Fighter_SetScale(gobj, rand_num);
 	// ft->scale.X = 0.5;
@@ -31,9 +33,18 @@ void lg_special_hold_s(GOBJ* gobj) {
 	}
 	else {
 		appr_lstick = max_speed_lsick * sign(appr_lstick);
-	}
+	}*/
 	OSReport("appr_lstick: %f\n", appr_lstick);
 	fd->phys.self_vel_ground.X = appr_lstick;
 	// bones[TransN].joint->scale.X = 0.5;
 	//jobj->scale.X = rand_num;
+}
+
+void EnterDoubleJump(GOBJ* gobj) {
+	void (*cb)(GOBJ * gobj) = (void*)0x800CBBC0;
+	cb(gobj);
+
+	//FighterData* fd = gobj->userdata;
+
+	//Fighter_SetScale(gobj, 1.0);
 }

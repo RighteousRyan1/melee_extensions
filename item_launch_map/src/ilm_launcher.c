@@ -38,7 +38,7 @@ void onFrameCb(GOBJ* map) {
 
     int randChance = HSD_Randf() <= chance; //HSD_Randi(RAND_CHANCE_FRAME);
 
-    OSReport("Chance: %f\n", chance);
+    // OSReport("Chance: %f\n", chance);
 
     // only run future code if there is an item to spawn (given the random chance)
     if (!randChance)

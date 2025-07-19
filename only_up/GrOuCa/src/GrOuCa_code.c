@@ -1,4 +1,4 @@
-#include "only_up.h"
+#include "GrOuCa.h"
 
 // just experimenting a tad
 /*SpawnItem i = {
@@ -15,7 +15,7 @@ void grOuCa_onCreation(GOBJ* map) {
 
     MapData* md = map->userdata;
 
-    Stage_InitDamageHazard(map, 0, OnTouchLine);
+    //Stage_InitDamageHazard(map, 0, OnTouchLine);
 
     // magical shit
     // COBJ* camera = md->camera_gobj->userdata;

@@ -3,7 +3,6 @@
 const int validLauncherItems[] = {
     ITEM_BOBOMB,
 };
-
 static Vec3 launcher_left = {
     .X = -327.5,
     .Y = 63.5,
@@ -80,13 +79,14 @@ void onFrameCb(GOBJ* map) {
         .it_kind = kind,
         .pos = launcher_pos,
         .pos2 = launcher_pos,
-        .vel = vel_actual
+        .vel = vel_actual,
     };
 
     // create + launch the item
     // Item_CreateItem(&item);
     GOBJ* newItem = Item_CreateItem(&item);
-    //ItemData id = newItem->userdata;
+    // ItemData id = newItem->userdata;
+    //id.it_hurt.
 }
 
 void onDeletion(GOBJ* map) {

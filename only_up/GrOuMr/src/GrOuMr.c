@@ -1,5 +1,5 @@
-#include "only_up.h"
-#include "only_up_hazards.c"
+#include "GrOuMr.h"
+#include "GrOuMr_code.c"
 
 __attribute__((used))
 static struct MapDesc map_gobjs[] = {
@@ -25,7 +25,7 @@ static struct MapDesc map_gobjs[] = {
 	},
 	// map gobj 2
 	{
-		.onCreation = grOuCa_onCreation,
+		.onCreation = grOuMr_onCreation,
 		.onDeletion = 0x80223A7C,
 		.onFrame = 0x80223A84,
 		.onUnk = 0x80223AB8,
